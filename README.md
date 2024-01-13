@@ -58,7 +58,18 @@ Start the API.
 
 You can only make a single prediction at the time. 
 
+## Model
+
+BERTopic is used with basically all default parameters. 
+We fixed a random state for the UMAP algorithm, reduced the minimum size of a cluster in HDSCAN algorithm. More details are available on the notebook. 
+
+After the training, we use update_topic function with a transformer ('google/flan-t5-base') in order to get better human-readable labels (a single 2-grams rather than the 4 first keywords).
+
 ## Improvements
+1. **API**: we can only predict new instances one by one. We would prefer to upload a csv file.
+2. **Topic modelling**: we could get better results by a better fine-tuning, some topics are still overlaping.
+3. **Prompt engineering**: we could work on the prompt of the transformer. Only two prompts have been compared.
+4. **Evaluation**: we could implement a metric to evaluate the coherence between the topic and the documents assigned to it. 
 
 
 
