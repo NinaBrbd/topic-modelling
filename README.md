@@ -1,6 +1,6 @@
 # topic-modelling
 
-Subject of this project: 
+## Subject of this project
 
 🎯 **Objective:**
 
@@ -37,34 +37,40 @@ one topic per row.
 Time estimation and evaluation:
 ~2-3 hours, not more than 3 hours.
 
-Time used:
+## Libraries
 
-Project Organization
+The model selected is BERTopic. The training has been done on Google Collab with T4 GPU. 
+Here is the Wiki of the library: `https://maartengr.github.io/BERTopic/index.html`
 
-├── README.md      
-|
-├── main.py                             <- API functions (FastAPI)
-|   
-├── data                                <- Datasets
-│   ├── technical-test-dataset.csv      <- Initial dataset
-|   └── data_labeled.csv                <- Labeled dataset
-│
-├── guide                               <- Documented guidelines for the project
-│
-├── model                               <- Trained and serialized models (safetensors format)
-│   ├── config.json
-│   ├── topic_embeddings.safetensors                  
-│   └── topics.json
-│                             
-|
-├── notebooks                           <- Jupyter notebooks. Used to explore and train the model. 
-│
-├── requirements.txt                    <- The requirements file for reproducing the project
-│
-└── code                                <- Python scripts for predictions
-    │
-    ├── __init__.py                     <- Scripts to initialize the API and load the model 
-    │   
-    │
-    └── model_functions.py              <- Scripts to predict a new instance
+## Getting Started
+
+Clone the repo.
+
+`git clone`
+
+Install requirements. (Create a virtual environment first). 
+
+`pip install requirements.txt`
+
+Start the API.
+
+`uvicorn main:app`
+
+You can only make a single prediction at the time. 
+
+## Model
+
+BERTopic is used with basically all default parameters. 
+We fixed a random state for the UMAP algorithm, reduced the minimum size of a cluster in HDSCAN algorithm. More details are available on the notebook. 
+
+After the training, we use update_topic function with a transformer ('google/flan-t5-base') in order to get better human-readable labels (a single 2-grams rather than the 4 first keywords).
+
+## Improvements
+1. **API**: we can only predict new instances one by one. We would prefer to upload a csv file.
+2. **Topic modelling**: we could get better results by a better fine-tuning, some topics are still overlaping.
+3. **Prompt engineering**: we could work on the prompt of the transformer. Only two prompts have been compared.
+4. **Evaluation**: we could implement a metric to evaluate the coherence between the topic and the documents assigned to it. 
+
+
+
 
