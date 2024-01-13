@@ -7,6 +7,15 @@ from code.model_functions import get_prediction
 
 @app.get("/")
 async def get_data():
+    """
+    Get data from the 4 forms:
+        - question_title
+        - question_content
+        - best_answer
+        - all-in-one: represents the concat of the three precedent forms
+
+    Note that if some values are submitted in the all-in-one form, only this data will be predicted.
+    """
     content = """
 <body>
 <h1> BERTopic to find candidates topics </h1>
@@ -26,6 +35,17 @@ async def get_data():
 
 @app.post("/")
 async def predict(question_title: Annotated[str, Form()]="",question_content: Annotated[str, Form()]="",best_answer: Annotated[str, Form()]="",text: Annotated[str, Form()]=None):
+    """
+    Get data from the 4 forms:
+        - question_title
+        - question_content
+        - best_answer
+        - all-in-one: represents the concat of the three precedent forms
+
+    Note that if some values are submitted in the all-in-one form, only this data will be predicted.
+    
+    Returns the label name according to the trained model as JSON format.
+    """
     if text is None:
         text = ' '.join([question_content, question_title, best_answer])
     label = get_prediction(text)
