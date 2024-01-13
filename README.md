@@ -46,17 +46,31 @@ Here is the Wiki of the library: `https://maartengr.github.io/BERTopic/index.htm
 
 Clone the repo.
 
-`git clone`
+`git clone
+cd topic-modelling`
 
-Install requirements. (Create a virtual environment first). 
+Create a virtual environment.
 
-`pip install requirements.txt`
+On macOS/Linux:
 
-Start the API.
+ `python3 -m venv .env
+ source .env/bin/activate`
+
+Install required dependencies. 
+
+`pip install -r requirements.txt`
+
+Run the FastAPI.
 
 `uvicorn main:app`
 
-You can only make a single prediction at the time. 
+You can only make a single prediction at the time by filling the forms. 
+
+## API Endpoints 
+
+The FastAPI app provides the following endpoints: 
+
+- `/` : Accept a Form (text string) and predicts the label using the trained BERTopic model (GET and POST)
 
 ## Model
 
